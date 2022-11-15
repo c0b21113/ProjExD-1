@@ -1,4 +1,4 @@
-import pygame as pg
+import pygame as pg #各種モジュールの読み込み
 import sys
 from random import randint
 import numpy as np
@@ -63,12 +63,12 @@ class Hole:
         # モグラの得点が負の処理
         if(self.mogurapoint < 0):
             font2 = pg.font.SysFont(None, 45)
-            txt = font2.render("{}".format(self.mogurapoint), True, (0, 0, 0))
+            txt = font2.render("{}".format(self.mogurapoint), True, (200, 0, 0))
             self.scr.sfc.blit(txt, self.pos)
         # モグラの得点が正または0の処理
         else :
             font2 = pg.font.SysFont(None, 45)
-            txt = font2.render("+{}".format(self.mogurapoint), True, (0, 0, 0))
+            txt = font2.render("+{}".format(self.mogurapoint), True, (0, 0, 200))
             self.scr.sfc.blit(txt, self.pos)
             
 
@@ -172,13 +172,13 @@ class Bird:
         """
         x = 1
         if self.rct.left < scr_rct.left or scr_rct.right < self.rct.right:
-            x = -1
+            x = -1 #ランダム下でのこうかとんのバウンド
         return x
 
 
 class Hammer: # C0B21061
     def __init__(self, img, zoom, center):
-        sfc = pg.image.load(img)
+        sfc = pg.image.load(img)#カーソルと置き換える画像の読み込み
         self.sfc = pg.transform.scale(sfc, zoom)
         self.rct = self.sfc.get_rect()
         self.rct.center = center
@@ -194,7 +194,7 @@ class Hammer: # C0B21061
 def timeup(scr:Screen):
     """timeup処理をしています"""
     fonts = pg.font.Font(None, 100)
-    txt = fonts.render(str("TIME UP!"), True, (255, 0, 0))
+    txt = fonts.render(str("TIME UP!"), True, (255, 0, 0))#赤色の文字色でTimeUPを表示
     scr.sfc.blit(txt, (250, 350)) 
     pg.display.update()
     while True:
@@ -218,7 +218,7 @@ def bgm(bgm_num): #C0B21049
         pg.mixer.music.stop()
         sound = pg.mixer.Sound("fig/whistle.mp3")
         sound.play(0)
-        sound.set_volume(100)
+        sound.set_volume(1)
               
 def main():
     # スクリーン
